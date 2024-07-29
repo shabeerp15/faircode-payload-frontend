@@ -10,10 +10,10 @@ export async function Header() {
 	const response = await axios.get(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/globals/main-menu`);
 	const mainMenu = response.data;
 	const tabs = mainMenu.tabs;
-	const logo = tabs[0].logo?.url;
-	const ctxButtonLabel = tabs[0].ctxButton;
+	const logo = tabs[0]?.logo?.url;
+	const ctxButtonLabel = tabs[0]?.ctxButton;
 
-	const { navItems } = tabs[0];
+	const { navItems } = tabs[0] || {};
 
 	const hasNavItems = navItems && Array.isArray(navItems) && navItems.length > 0;
 
