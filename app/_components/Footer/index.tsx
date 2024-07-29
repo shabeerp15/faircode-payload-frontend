@@ -18,6 +18,7 @@ const Footer = async () => {
 					{/* Address */}
 					<div className="col-span-1">
 						{data &&
+							Array.isArray(data.address) &&
 							data?.address[0]?.children?.map((item: any, index: any) => (
 								<p key={index} className={`text-sm text-gray-600 ${item.bold && "font-bold"} ${item.italic && "italic"} ${item.underline && "underline"} `}>
 									{item.text}
@@ -27,19 +28,6 @@ const Footer = async () => {
 
 					{/* Work Inquiries */}
 					<div className="col-span-1">
-						{/* <div className="mb-8 border-b pb-2 bg-red-400">
-							<h3 className="text-sm font-semibold text-gray-900 uppercase mb-2">WORK INQUIRIES</h3>
-							<p className="text-sm text-gray-600">Interested in working with us?</p>
-							<a href="mailto:hello@faircode.com" className="text-sm text-gray-900 font-semibold hover:underline">
-								hello@faircode.com
-							</a>
-						</div>
-
-						<h3 className="text-sm font-semibold text-gray-900 uppercase mt-4 mb-2">WORK WITH US</h3>
-						<p className="text-sm text-gray-600">Looking for a job opportunity?</p>
-						<a href="mailto:hr@faircode.com" className="text-sm text-gray-900 font-semibold hover:underline">
-							hr@faircode.com
-						</a> */}
 						{data &&
 							data?.contact?.map((item: any, index: any) => (
 								<div className="mb-8 border-b pb-2 ">
