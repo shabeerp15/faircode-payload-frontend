@@ -6,6 +6,7 @@ import { CMSLink } from "../CMSLink";
 import { Button } from "@/components/ui/button";
 
 export async function Header() {
+	// const mainMenu = await fetch(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/globals/main-menu`).then((res) => res.json());
 	const response = await axios.get(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/globals/main-menu`);
 	const mainMenu = response.data;
 	const tabs = mainMenu.tabs;
