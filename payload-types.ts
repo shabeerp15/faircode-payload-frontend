@@ -85,16 +85,16 @@ export interface MainMenu {
 	createdAt?: string;
 }
 
-declare module "payload" {
-	export interface GeneratedTypes {
-		collections: {
-			pages: Page;
-			users: User;
-			"payload-preferences": PayloadPreference;
-			"payload-migrations": PayloadMigration;
-		};
-		globals: {
-			"main-menu": MainMenu;
-		};
-	}
-}
+// declare module "payload" {
+// 	export interface GeneratedTypes {
+// 		collections: {
+// 			pages: Page;
+// 			users: User;
+// 			"payload-preferences": PayloadPreference;
+// 			"payload-migrations": PayloadMigration;
+// 		};
+// 		globals: {
+// 			"main-menu": MainMenu;
+// 		};
+// 	}
+// }
