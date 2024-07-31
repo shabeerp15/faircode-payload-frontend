@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ["localhost"],
+        domains: ["localhost", "payload-test-production-a817.up.railway.app"],
     }
 };
 
