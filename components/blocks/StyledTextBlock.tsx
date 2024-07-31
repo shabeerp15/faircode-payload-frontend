@@ -7,7 +7,7 @@ const TextItem = ({ text, style }: any) => {
 		outlined: "font-outline text-transparent bg-clip-text font-bold",
 	};
 
-	return <span className={`${baseClasses} ${styleClasses[style]} mr-4`}>{text}</span>;
+	return <span className={`${baseClasses} ${styleClasses[style]} mr-6`}>{text}</span>;
 };
 
 const StyledTextBlock = ({ textItems }: any) => {

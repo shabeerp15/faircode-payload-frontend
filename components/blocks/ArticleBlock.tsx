@@ -1,6 +1,7 @@
 import React from "react";
 import { ChevronRight } from "lucide-react";
 import moment from "moment";
+import Link from "next/link";
 
 const Article = ({ title, image, authorName, authorImage, date }: any = {}) => {
 	date = moment(date);
@@ -35,10 +36,10 @@ const ArticleBlock = ({ title, ctxButton, articles }: any = {}) => {
 		<div className="lg:max-w-screen-lg mx-auto my-8">
 			<div className="flex justify-between">
 				<h1 className="text-4xl font-bold">{title}</h1>
-				<button className="text-sm font-semibold py-3 px-6 text-black hover:underline mb-2 flex items-center gap-2">
+				<Link href="/articles" className="text-sm font-semibold py-3 px-6 text-black hover:underline mb-2 flex items-center gap-2">
 					{ctxButton}
 					<ChevronRight />
-				</button>
+				</Link>
 			</div>
 			<div className="flex gap-2">
 				{/* <Article /> */}
