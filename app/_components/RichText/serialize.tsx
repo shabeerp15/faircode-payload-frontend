@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import escapeHTML from "escape-html";
 
-// Define Text type
+
 type Text = {
 	text: string;
 	bold?: boolean;
@@ -11,7 +11,6 @@ type Text = {
 	strikethrough?: boolean;
 };
 
-// Define Leaf type, extending Text type
 type Leaf = {
 	type: string;
 	value?: {
@@ -23,61 +22,20 @@ type Leaf = {
 	[key: string]: unknown;
 } & Text;
 
-// Define Children type as an array of Leaf
 type Children = Leaf[];
 
-// Function to check if a node is a Text node
 const isTextNode = (node: any): node is Text => {
 	return typeof node.text === "string";
 };
 
-// Serialize function to convert nodes to React elements
 const serialize = (children: Children): React.ReactNode[] =>
 	children.map((node: any, i) => {
 		if (isTextNode(node)) {
-			let text = <span dangerouslySetInnerHTML={{ __html: escapeHTML(node.text) }} />;
-
-			if (node.bold) {
-				text = (
-					<strong key={i} className="font-bold">
-						{text}
-					</strong>
-				);
-			}
-
-			if (node.code) {
-				text = (
-					<code key={i} className="font-mono bg-gray-200 p-1 rounded">
-						{text}
-					</code>
-				);
-			}
-
-			if (node.italic) {
-				text = (
-					<em key={i} className="italic">
-						{text}
-					</em>
-				);
-			}
-
-			if (node.underline) {
-				text = (
-					<span className="underline" key={i}>
-						{text}
-					</span>
-				);
-			}
-
-			if (node.strikethrough) {
-				text = (
-					<span className="line-through" key={i}>
-						{text}
-					</span>
-				);
-			}
-
-			return <Fragment key={i}>{text}</Fragment>;
+			return (
+				<span key={i} className={`text-black ${node.bold && "font-bold"} ${node.italic && "italic"} ${node.underline && "underline"} ${node.strikethrough && "line-through"}`}>
+					{node.code ? <code className="font-mono bg-gray-200 p-1 rounded">{node.text}</code> : node.text}
+				</span>
+			);
 		}
 
 		if (!node) {
