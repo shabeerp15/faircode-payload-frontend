@@ -12,7 +12,7 @@ interface TechExpertBlockProps {
 	ctaText: string;
 	ctaLink: string;
 	imageSrc: string;
-	cardIconLink: string;
+	cardIconLink?: string;
 }
 const TechExpertBlock = ({ title, subtitle, description, ctaText, ctaLink, imageSrc, cardIconLink }: TechExpertBlockProps) => {
 	const imageSrcs = [imageSrc, imageSrc];
