@@ -31,7 +31,6 @@ const Article = ({ title, image, authorName, authorImage, date }: any = {}) => {
 };
 
 const ArticleBlock = ({ title, ctxButton, articles }: any = {}) => {
-	console.log(articles);
 	return (
 		<div className="lg:max-w-screen-lg mx-auto my-8">
 			<div className="flex justify-between">

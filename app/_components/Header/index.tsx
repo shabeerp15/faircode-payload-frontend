@@ -4,6 +4,7 @@ import axios from "axios";
 
 import { CMSLink } from "../CMSLink";
 import { Button } from "@/components/ui/button";
+import Navbar from "./navbar";
 
 export async function Header() {
 	// const mainMenu = await fetch(`${process.env.NEXT_PUBLIC_PAYLOAD_URL}/api/globals/main-menu`).then((res) => res.json());
@@ -24,14 +25,7 @@ export async function Header() {
 					<div className="flex-shrink-0 flex items-center">
 						<Image src={process.env.NEXT_PUBLIC_PAYLOAD_URL + logo} alt="Faircode" width={255} height={65} className="p-10" />
 					</div>
-					{hasNavItems && (
-						<div className="hidden lg:ml-6 sm:ml-3 md:flex lg:space-x-8 sm:space-x-2">
-							{navItems.map((item, i) => {
-								const { link } = item.defaultLink;
-								return <CMSLink key={i} {...link} className="inline-flex items-center px-1 pt-1 text-sm font-medium" />;
-							})}
-						</div>
-					)}
+					{hasNavItems && <Navbar navItems={navItems} />}
 					<div className="hidden lg:ml-6 sm:ml-2 md:flex sm:items-center">
 						<Button variant="outline" className="rounded-none border border-gray-300 text-xs">
 							{ctxButtonLabel}
