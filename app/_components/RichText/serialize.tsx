@@ -1,91 +1,164 @@
-// import React, { Fragment } from "react";
-// import escapeHTML from "escape-html";
+import React, { Fragment } from "react";
+import escapeHTML from "escape-html";
 
-// // eslint-disable-next-line no-use-before-define
-// type Children = Leaf[];
+// Define Text type
+type Text = {
+	text: string;
+	bold?: boolean;
+	code?: boolean;
+	italic?: boolean;
+	underline?: boolean;
+	strikethrough?: boolean;
+};
 
-// type Leaf = {
-// 	type: string;
-// 	value?: {
-// 		url: string;
-// 		alt: string;
-// 	};
-// 	children: Children;
-// 	url?: string;
-// 	[key: string]: unknown;
-// };
+// Define Leaf type, extending Text type
+type Leaf = {
+	type: string;
+	value?: {
+		url: string;
+		alt: string;
+	};
+	children: Children;
+	url?: string;
+	[key: string]: unknown;
+} & Text;
 
-// const serialize = (children: Children): React.ReactNode[] =>
-// 	children.map((node, i) => {
-// 		if (Text.isText(node)) {
-// 			let text = <span dangerouslySetInnerHTML={{ __html: escapeHTML(node.text) }} />;
+// Define Children type as an array of Leaf
+type Children = Leaf[];
 
-// 			if (node.bold) {
-// 				text = <strong key={i}>{text}</strong>;
-// 			}
+// Function to check if a node is a Text node
+const isTextNode = (node: any): node is Text => {
+	return typeof node.text === "string";
+};
 
-// 			if (node.code) {
-// 				text = <code key={i}>{text}</code>;
-// 			}
+// Serialize function to convert nodes to React elements
+const serialize = (children: Children): React.ReactNode[] =>
+	children.map((node: any, i) => {
+		if (isTextNode(node)) {
+			let text = <span dangerouslySetInnerHTML={{ __html: escapeHTML(node.text) }} />;
 
-// 			if (node.italic) {
-// 				text = <em key={i}>{text}</em>;
-// 			}
+			if (node.bold) {
+				text = (
+					<strong key={i} className="font-bold">
+						{text}
+					</strong>
+				);
+			}
 
-// 			if (node.underline) {
-// 				text = (
-// 					<span style={{ textDecoration: "underline" }} key={i}>
-// 						{text}
-// 					</span>
-// 				);
-// 			}
+			if (node.code) {
+				text = (
+					<code key={i} className="font-mono bg-gray-200 p-1 rounded">
+						{text}
+					</code>
+				);
+			}
 
-// 			if (node.strikethrough) {
-// 				text = (
-// 					<span style={{ textDecoration: "line-through" }} key={i}>
-// 						{text}
-// 					</span>
-// 				);
-// 			}
+			if (node.italic) {
+				text = (
+					<em key={i} className="italic">
+						{text}
+					</em>
+				);
+			}
 
-// 			return <Fragment key={i}>{text}</Fragment>;
-// 		}
+			if (node.underline) {
+				text = (
+					<span className="underline" key={i}>
+						{text}
+					</span>
+				);
+			}
 
-// 		if (!node) {
-// 			return null;
-// 		}
+			if (node.strikethrough) {
+				text = (
+					<span className="line-through" key={i}>
+						{text}
+					</span>
+				);
+			}
 
-// 		switch (node.type) {
-// 			case "h1":
-// 				return <h1 key={i}>{serialize(node.children)}</h1>;
-// 			case "h2":
-// 				return <h2 key={i}>{serialize(node.children)}</h2>;
-// 			case "h3":
-// 				return <h3 key={i}>{serialize(node.children)}</h3>;
-// 			case "h4":
-// 				return <h4 key={i}>{serialize(node.children)}</h4>;
-// 			case "h5":
-// 				return <h5 key={i}>{serialize(node.children)}</h5>;
-// 			case "h6":
-// 				return <h6 key={i}>{serialize(node.children)}</h6>;
-// 			case "blockquote":
-// 				return <blockquote key={i}>{serialize(node.children)}</blockquote>;
-// 			case "ul":
-// 				return <ul key={i}>{serialize(node.children)}</ul>;
-// 			case "ol":
-// 				return <ol key={i}>{serialize(node.children)}</ol>;
-// 			case "li":
-// 				return <li key={i}>{serialize(node.children)}</li>;
-// 			case "link":
-// 				return (
-// 					<a href={escapeHTML(node.url)} key={i}>
-// 						{serialize(node.children)}
-// 					</a>
-// 				);
+			return <Fragment key={i}>{text}</Fragment>;
+		}
 
-// 			default:
-// 				return <p key={i}>{serialize(node.children)}</p>;
-// 		}
-// 	});
+		if (!node) {
+			return null;
+		}
 
-// export default serialize;
+		switch (node.type) {
+			case "h1":
+				return (
+					<h1 key={i} className="text-8xl  my-4">
+						{serialize(node.children)}
+					</h1>
+				);
+			case "h2":
+				return (
+					<h2 key={i} className="text-6xl  my-4">
+						{serialize(node.children)}
+					</h2>
+				);
+			case "h3":
+				return (
+					<h3 key={i} className="text-5xl  my-4">
+						{serialize(node.children)}
+					</h3>
+				);
+			case "h4":
+				return (
+					<h4 key={i} className="text-3xl  my-4">
+						{serialize(node.children)}
+					</h4>
+				);
+			case "h5":
+				return (
+					<h5 key={i} className="text-2xl  my-4">
+						{serialize(node.children)}
+					</h5>
+				);
+			case "h6":
+				return (
+					<h6 key={i} className="text-xl  my-4">
+						{serialize(node.children)}
+					</h6>
+				);
+			case "blockquote":
+				return (
+					<blockquote key={i} className="border-l-4 border-gray-400 pl-4 italic my-4">
+						{serialize(node.children)}
+					</blockquote>
+				);
+			case "ul":
+				return (
+					<ul key={i} className="list-disc list-inside my-4">
+						{serialize(node.children)}
+					</ul>
+				);
+			case "ol":
+				return (
+					<ol key={i} className="list-decimal list-inside my-4">
+						{serialize(node.children)}
+					</ol>
+				);
+			case "li":
+				return (
+					<li key={i} className="my-1">
+						{serialize(node.children)}
+					</li>
+				);
+			case "link":
+				return (
+					<a href={escapeHTML(node.url)} key={i} className="text-blue-600 underline">
+						{serialize(node.children)}
+					</a>
+				);
+
+			default:
+				return (
+					<p key={i} className="my-4">
+						{serialize(node.children)}
+					</p>
+				);
+		}
+	});
+
+export default serialize;

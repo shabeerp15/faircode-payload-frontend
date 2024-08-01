@@ -15,6 +15,7 @@ import FeaturedBlock from "@/components/blocks/FeaturedBlock";
 import TestimonialSlider from "@/components/blocks/TestimonialSliderBlock";
 import ArticleBlock from "@/components/blocks/ArticleBlock";
 import StyledTextBlock from "@/components/blocks/StyledTextBlock";
+import Callout from "@/components/blocks/Callout";
 
 export const PageTemplate: React.FC<{ page: Page | null | undefined | any }> = ({ page }) => {
 	const { data } = useLivePreview({
@@ -26,8 +27,8 @@ export const PageTemplate: React.FC<{ page: Page | null | undefined | any }> = (
 	return (
 		<>
 			{data.layout.map((block: any, index: any) => {
-				// console.log(block.blockType);
-				// console.log({ block });
+				console.log(block.blockType);
+				console.log({ block });
 				if (block.blockType === "techExpertBlock") {
 					return <TechExpertBlock key={index} title={block.title} subtitle={block.subtitle} description={block.description} ctaText={block.ctaText} ctaLink={block.ctaLink} imageSrc={block.image.url} />;
 				}
@@ -67,6 +68,9 @@ export const PageTemplate: React.FC<{ page: Page | null | undefined | any }> = (
 				}
 				if (block.blockType === "styledTextBlock") {
 					return <StyledTextBlock key={index} textItems={block.textItems} />;
+				}
+				if (block.blockType === "callout") {
+					return <Callout key={index} calloutFields={block.calloutFields} />;
 				}
 			})}
 		</>
