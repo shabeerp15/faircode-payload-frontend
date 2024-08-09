@@ -16,6 +16,7 @@ import TestimonialSlider from "@/components/blocks/TestimonialSliderBlock";
 import ArticleBlock from "@/components/blocks/ArticleBlock";
 import StyledTextBlock from "@/components/blocks/StyledTextBlock";
 import Callout from "@/components/blocks/Callout";
+import NewsBlock from "@/components/blocks/NewsBlock";
 
 export const PageTemplate: React.FC<{ page: Page | null | undefined | any }> = ({ page }) => {
 	const { data } = useLivePreview({
@@ -71,6 +72,9 @@ export const PageTemplate: React.FC<{ page: Page | null | undefined | any }> = (
 				}
 				if (block.blockType === "callout") {
 					return <Callout key={index} calloutFields={block.calloutFields} />;
+				}
+				if (block.blockType === "newsBlock") {
+					return <NewsBlock key={index} title={block.title} author={block.author} content={block.content} />;
 				}
 			})}
 		</>
